@@ -37,6 +37,8 @@ noButton.addEventListener("mouseover", () => {
 });
 
 yesButton.addEventListener("click", () => {
+  music.play();
+
   question.textContent = "💖";
   message.textContent = "Sabía que aceptarías 💘";
   document.querySelector(".buttons").style.display = "none";
