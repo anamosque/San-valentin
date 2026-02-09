@@ -37,20 +37,20 @@ yesButton.addEventListener("click", () => {
   document.body.innerHTML = `
     <img src="img/nosotros.jpg" class="fullscreen-img">
     <div style="
-      position: fixed;
-      bottom: 40px;
-      width: 100%;
-      text-align: center;
-      font-size: 36px;
-      color: white;
-      font-weight: bold;
-      text-shadow: 0 0 20px black;
-      z-index: 10000;
-    ">
-      Sabía que aceptarías 💘
-    </div>
-  `;
-});
+      <div style="
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  font-size: 40px;
+  color: white;
+  font-weight: bold;
+  text-shadow: 0 0 25px black;
+  z-index: 10000;
+">
+  Sabía que aceptarías 💘
+</div>
 
 /* BOTÓN NO */
 const noMessages = [
