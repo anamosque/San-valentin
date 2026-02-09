@@ -56,8 +56,7 @@ button {
 /* Foto oculta al inicio */
 #photo {
   display: none;
-  margin-top: 20px;
-  width: 90vw;
-  max-width: 500px;
-  border-radius: 25px;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
 }
