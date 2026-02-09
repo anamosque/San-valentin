@@ -1,6 +1,6 @@
 body {
   background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-  font-family: 'Arial', sans-serif;
+  font-family: Arial, sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -14,7 +14,7 @@ body {
   border-radius: 20px;
   text-align: center;
   box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-  width: 300px;
+  width: 320px;
 }
 
 h1 {
@@ -24,16 +24,16 @@ h1 {
 .buttons {
   margin-top: 20px;
   position: relative;
-  height: 120px;
+  height: 140px;
 }
 
 button {
   padding: 12px 25px;
   font-size: 16px;
   border: none;
-  border-radius: 10px;
+  border-radius: 12px;
   cursor: pointer;
-  transition: 0.3s;
+  transition: transform 0.3s;
 }
 
 #yes {
@@ -48,8 +48,15 @@ button {
 }
 
 #message {
-  margin-top: 20px;
-  font-size: 16px;
+  margin-top: 15px;
   color: #e63946;
   font-weight: bold;
+}
+
+/* Foto oculta al inicio */
+#photo {
+  display: none;
+  margin-top: 20px;
+  width: 100%;
+  border-radius: 15px;
 }
