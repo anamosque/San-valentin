@@ -3,6 +3,7 @@ const yesButton = document.getElementById("yes");
 const message = document.getElementById("message");
 const photo = document.getElementById("photo");
 const question = document.getElementById("question");
+const music = document.getElementById("music");
 
 const messages = [
   "¿Segur@? 😳",
