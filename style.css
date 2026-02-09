@@ -1,3 +1,4 @@
+/* Reset total */
 html, body {
   margin: 0;
   padding: 0;
@@ -6,6 +7,51 @@ html, body {
   overflow: hidden;
 }
 
+/* Pantalla inicial */
+body {
+  background: radial-gradient(circle at top, #ffd1dc, #ff9aa2, #ff6f91);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Segoe UI', sans-serif;
+  color: white;
+  text-align: center;
+}
+
+/* Título */
+h1 {
+  font-size: 48px;
+  margin-bottom: 40px;
+  text-shadow: 0 0 25px rgba(255, 255, 255, 0.5);
+}
+
+/* Contenedor botones */
+div {
+  display: flex;
+  gap: 20px;
+}
+
+/* Botones */
+button {
+  font-size: 22px;
+  padding: 14px 32px;
+  border-radius: 40px;
+  border: none;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.25);
+  color: white;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.35);
+}
+
+/* Imagen final fullscreen */
 .fullscreen-img {
   position: fixed;
   top: 0;
@@ -14,13 +60,4 @@ html, body {
   height: 100vh;
   object-fit: cover;
   z-index: 9999;
-}
-
-body {
-  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  font-family: Arial, sans-serif;
 }
