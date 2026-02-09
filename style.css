@@ -1,3 +1,7 @@
+body {
+  background: red !important;
+}
+
 /* Reset total */
 html, body {
   margin: 0;
