@@ -32,25 +32,35 @@ const music = document.getElementById("music");
 
 /* BOTÓN SÍ */
 yesButton.addEventListener("click", () => {
+  // reproducir música ANTES de borrar el body
+  music.volume = 0.8;
   music.play();
 
+  // guardar la música antes de borrar el body
+  const audioHTML = music.outerHTML;
+
   document.body.innerHTML = `
+    ${audioHTML}
     <img src="img/nosotros.jpg" class="fullscreen-img">
     <div style="
-      <div style="
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  font-size: 40px;
-  color: white;
-  font-weight: bold;
-  text-shadow: 0 0 25px black;
-  z-index: 10000;
-">
-  Sabía que aceptarías 💘
-</div>
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      font-size: 40px;
+      color: white;
+      font-weight: bold;
+      text-shadow: 0 0 25px black;
+      z-index: 10000;
+    ">
+      Sabía que aceptarías 💘
+    </div>
+  `;
+
+  // volver a reproducir por si el navegador lo pausa
+  document.getElementById("music").play();
+});
 
 /* BOTÓN NO */
 const noMessages = [
