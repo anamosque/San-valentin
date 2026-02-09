@@ -22,21 +22,18 @@ noButton.addEventListener("mouseover", () => {
 });
 
 yesButton.addEventListener("click", () => {
-  document.body.style.background = "black";
-  document.body.style.margin = "0";
-
   document.body.innerHTML = `
     <img src="img/nosotros.jpg" class="fullscreen-img">
     <div style="
-      position:fixed;
-      bottom:40px;
-      width:100%;
-      text-align:center;
-      color:white;
-      font-size:32px;
-      font-weight:bold;
-      text-shadow:0 0 15px black;
-      z-index:10000;
+      position: fixed;
+      bottom: 40px;
+      width: 100%;
+      text-align: center;
+      font-size: 36px;
+      color: white;
+      font-weight: bold;
+      text-shadow: 0 0 20px black;
+      z-index: 10000;
     ">
       Sabía que aceptarías 💘
     </div>
