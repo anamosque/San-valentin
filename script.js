@@ -21,7 +21,10 @@ noButton.addEventListener("mouseover", () => {
   yesButton.style.transform = `scale(${yesScale})`;
 });
 
+
 yesButton.addEventListener("click", () => {
+  music.play();
+
   document.body.innerHTML = `
     <img src="img/nosotros.jpg" class="fullscreen-img">
     <div style="
