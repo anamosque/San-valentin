@@ -36,19 +36,8 @@ noButton.addEventListener("mouseover", () => {
 });
 
 yesButton.addEventListener("click", () => {
-  document.body.innerHTML = `
-    <img src="img/nosotros.jpg" style="width:100vw;height:100vh;object-fit:cover;">
-    <div style="
-      position:fixed;
-      bottom:30px;
-      width:100%;
-      text-align:center;
-      color:white;
-      font-size:24px;
-      font-weight:bold;
-      text-shadow:0 0 10px black;
-    ">
-      Sabía que aceptarías 💘
-    </div>
-  `;
+  question.textContent = "💖";
+  message.textContent = "Sabía que aceptarías 💘";
+  document.querySelector(".buttons").style.display = "none";
+  photo.style.display = "block";
 });
