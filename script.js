@@ -39,5 +39,9 @@ yesButton.addEventListener("click", () => {
   question.textContent = "💖";
   message.textContent = "Sabía que aceptarías 💘";
   document.querySelector(".buttons").style.display = "none";
+
   photo.style.display = "block";
+  photo.style.width = "90vw";
+  photo.style.maxWidth = "500px";
+  photo.style.margin = "20px auto";
 });
