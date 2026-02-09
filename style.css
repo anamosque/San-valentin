@@ -58,5 +58,8 @@ button {
   display: none;
   margin-top: 20px;
   width: 100%;
-  border-radius: 15px;
+  max-width: 400px;
+  border-radius: 20px;
+}
+
 }
