@@ -37,14 +37,30 @@ noButton.addEventListener("mouseover", () => {
 });
 
 yesButton.addEventListener("click", () => {
+  // Reproduce la música
   music.play();
 
-  question.textContent = "💖";
-  message.textContent = "Sabía que aceptarías 💘";
-  document.querySelector(".buttons").style.display = "none";
-
-  photo.style.display = "block";
-  photo.style.width = "90vw";
-  photo.style.maxWidth = "500px";
-  photo.style.margin = "20px auto";
+  // Limpia la pantalla y muestra la imagen a pantalla completa
+  document.body.innerHTML = `
+    <img 
+      src="img/nosotros.jpg"
+      style="
+        width:100vw;
+        height:100vh;
+        object-fit:cover;
+      "
+    >
+    <div style="
+      position:fixed;
+      bottom:30px;
+      width:100%;
+      text-align:center;
+      color:white;
+      font-size:28px;
+      font-weight:bold;
+      text-shadow:0 0 10px black;
+    ">
+      Sabía que aceptarías 💘
+    </div>
+  `;
 });
