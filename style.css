@@ -13,7 +13,12 @@ html, body {
 
 /* Pantalla inicial */
 body {
-  background: radial-gradient(circle at top, #ffd1dc, #ff9aa2, #ff6f91);
+  background: radial-gradient(
+    circle at top,
+    #ffd1dc,
+    #f4b6d8,
+    #cdb4db
+  );
   display: flex;
   flex-direction: column;
   justify-content: center;
