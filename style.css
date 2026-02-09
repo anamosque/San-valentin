@@ -57,9 +57,7 @@ button {
 #photo {
   display: none;
   margin-top: 20px;
-  width: 100%;
-  max-width: 400px;
-  border-radius: 20px;
-}
-
+  width: 90vw;
+  max-width: 500px;
+  border-radius: 25px;
 }
