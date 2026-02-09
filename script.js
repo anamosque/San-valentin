@@ -1,6 +1,5 @@
 const noButton = document.getElementById("no");
 const yesButton = document.getElementById("yes");
-const photo = document.getElementById("photo");
 const music = document.getElementById("music");
 
 let noScale = 1;
@@ -23,27 +22,19 @@ noButton.addEventListener("mouseover", () => {
 });
 
 yesButton.addEventListener("click", () => {
-  // limpiar pantalla
-  document.body.innerHTML = "";
-
-  // imagen a pantalla completa
-  const img = document.createElement("img");
-  img.src = "img/nosotros.jpg";
-  img.className = "fullscreen-img";
-  document.body.appendChild(img);
-
-  // texto encima
-  const text = document.createElement("div");
-  text.innerText = "Sabía que aceptarías 💘";
-  text.style.position = "fixed";
-  text.style.bottom = "40px";
-  text.style.width = "100%";
-  text.style.textAlign = "center";
-  text.style.color = "white";
-  text.style.fontSize = "32px";
-  text.style.fontWeight = "bold";
-  text.style.textShadow = "0 0 15px black";
-  text.style.zIndex = "1000";
-
-  document.body.appendChild(text);
+  document.body.innerHTML = `
+    <img src="img/nosotros.jpg" class="fullscreen-img">
+    <div style="
+      position:fixed;
+      bottom:40px;
+      width:100%;
+      text-align:center;
+      color:white;
+      font-size:32px;
+      font-weight:bold;
+      text-shadow:0 0 15px black;
+    ">
+      Sabía que aceptarías 💘
+    </div>
+  `;
 });
