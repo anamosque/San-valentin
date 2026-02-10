@@ -11,11 +11,10 @@ let clickCount = 0;
 
 // 1. SECUENCIA DE MENSAJES INICIALES
 const mensajesIniciales = [
-    "HOLA AMOR...",
-    "Tengo algo que decirte...",
-    "Desde que te conocí...",
-    "Mi vida es mucho más bonita.",
-    "Por eso...",
+    "Hola, mi amor...❤️ ",
+    "Tengo algo especial que decirte...",
+    "Me haces la persona más feliz del mundo",
+    "Y por eso mismo...",
     "Necesito saber si..."
     "¿Quieres ser mi San Valentín? ❤️"
 ];
