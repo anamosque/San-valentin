@@ -17,9 +17,9 @@
             text-align: center;
         }
         .container { width: 90%; max-width: 500px; }
-        h1 { color: #d32f2f; font-size: 2rem; min-height: 80px; transition: opacity 0.5s; }
+        h1 { color: #d32f2f; font-size: 2rem; min-height: 80px; }
         .botones {
-            display: none; /* Se activa por JS */
+            display: none; 
             justify-content: center;
             align-items: center;
             gap: 15px;
@@ -49,50 +49,94 @@
 <body>
 
     <div class="container">
-        <h1 id="texto">Cargando...</h1>
+        <h1 id="texto">HOLA AMOR ❤️</h1>
+        
         <div class="botones" id="contenedor-botones">
             <button id="yes">Sí</button>
             <button id="no">No</button>
         </div>
     </div>
 
-    <audio id="musica" loop prefetch="auto">
+    <audio id="musica" loop>
         <source src="musica.mp3" type="audio/mpeg">
     </audio>
 
     <script>
-        // Esperar a que el DOM esté listo
-        document.addEventListener("DOMContentLoaded", () => {
-            const texto = document.getElementById("texto");
-            const botones = document.getElementById("contenedor-botones");
-            const yesBtn = document.getElementById("yes");
-            const noBtn = document.getElementById("no");
-            const musica = document.getElementById("musica");
+        // Variables globales
+        const texto = document.getElementById("texto");
+        const botones = document.getElementById("contenedor-botones");
+        const yesBtn = document.getElementById("yes");
+        const noBtn = document.getElementById("no");
+        const musica = document.getElementById("musica");
 
-            const mensajes = [
-                "HOLA AMOR ❤️",
-                "Tengo algo que decirte...",
-                "Eres lo mejor que me ha pasado.",
-                "¿Quieres ser mi San Valentín? 🌹"
-            ];
+        const mensajes = [
+            "Tengo algo que decirte...",
+            "Eres lo mejor que me ha pasado.",
+            "¿Quieres ser mi San Valentín? 🌹"
+        ];
 
-            const frasesNo = ["¿Segura?", "Piénsalo bien...", "¡Andaaa!", "😭", "💔"];
+        const frasesNo = ["¿Segura?", "Piénsalo bien...", "¡Andaaa!", "😭", "💔", "No seas así...", "¡Di que sí!"];
 
-            let i = 0;
-            let countNo = 0;
-            let scaleSi = 1;
+        let i = 0;
+        let countNo = 0;
+        let scaleSi = 1;
 
-            // Función para mostrar mensajes
-            function mostrarSiguiente() {
-                if (i < mensajes.length) {
-                    texto.style.opacity = 0;
-                    setTimeout(() => {
-                        texto.innerText = mensajes[i];
-                        texto.style.opacity = 1;
-                        i++;
-                        if (i === mensajes.length) {
-                            setTimeout(() => { botones.style.display = "flex"; }, 1000);
-                        } else {
-                            setTimeout(mostrarSiguiente, 2000);
-                        }
-                    },
+        // Función de secuencia (empieza después del primer mensaje)
+        function iniciarSecuencia() {
+            if (i < mensajes.length) {
+                setTimeout(() => {
+                    texto.innerText = mensajes[i];
+                    i++;
+                    if (i === mensajes.length) {
+                        botones.style.display = "flex";
+                    } else {
+                        iniciarSecuencia();
+                    }
+                }, 2500);
+            }
+        }
+
+        // Lanzar secuencia
+        iniciarSecuencia();
+
+        // Botón NO: se achica, cambia de texto y agranda al SI
+        noBtn.addEventListener("click", () => {
+            scaleSi += 0.5;
+            yesBtn.style.transform = `scale(${scaleSi})`;
+            
+            if (countNo < frasesNo.length) {
+                noBtn.innerText = frasesNo[countNo];
+                countNo++;
+            }
+            
+            let scaleNo = 1 - (countNo * 0.12);
+            if (scaleNo > 0.2) {
+                noBtn.style.transform = `scale(${scaleNo})`;
+            } else {
+                noBtn.style.display = 'none';
+            }
+        });
+
+        // Botón SÍ: Final con mensaje y foto
+        yesBtn.addEventListener("click", () => {
+            musica.play().catch(() => console.log("Audio bloqueado"));
+            
+            document.body.innerHTML = `
+                <div style="background: linear-gradient(#ff80ab, #ff4081); height: 100vh; width: 100vw; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; padding: 20px; box-sizing: border-box;">
+                    <h1 style="color: white; font-size: 2.5rem;">¡SABÍA QUE DIRÍAS QUE SÍ! 😍</h1>
+                    <img src="nosotros.jpg" class="foto-final">
+                    <div style="background: rgba(255,255,255,0.2); padding: 20px; border-radius: 15px; margin-top: 15px; max-width: 450px;">
+                        <p style="font-size: 1.3rem; line-height: 1.4;">"De todas las personas en el mundo, siempre te elegiría a ti. Gracias por hacer que cada día se sienta como San Valentín. ¡Te quiero muchísimo!"</p>
+                    </div>
+                    <div style="font-size: 2rem; margin-top: 15px;">🌹 ✨ 🥂</div>
+                </div>
+            `;
+        });
+
+        // Habilitar música con interacción
+        document.addEventListener("click", () => {
+            if(musica.paused) musica.play().then(() => musica.pause());
+        }, { once: true });
+    </script>
+</body>
+</html>
