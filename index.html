@@ -2,32 +2,25 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>San Valentín 💘</title>
-
-  <!-- ESTILOS -->
   <link rel="stylesheet" href="./style.css">
 </head>
-
 <body>
 
-  <!-- TEXTO -->
-  <h1></h1>
+  <div class="container">
+    <h1 id="texto">Hola... tengo algo que decirte...</h1>
 
-  <!-- BOTONES -->
-  <div>
-    <button id="yes">Sí</button>
-    <button id="no">No</button>
+    <div class="botones">
+      <button id="yes">Sí</button>
+      <button id="no">No</button>
+    </div>
   </div>
 
- <audio id="musica" loop>
-  <source src="musica.mp3" type="audio/mpeg">
-</audio>
+  <audio id="musica" loop>
+    <source src="musica.mp3" type="audio/mpeg">
+  </audio>
 
-<!-- Botón para reproducir -->
-<button onclick="document.getElementById('musica').play()">🎵 Reproducir música</button>
-
-  <!-- SCRIPT -->
   <script src="./script.js"></script>
-
 </body>
 </html>
