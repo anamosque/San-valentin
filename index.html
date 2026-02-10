@@ -16,43 +16,83 @@
             overflow: hidden;
             text-align: center;
         }
-        .container { padding: 20px; z-index: 10; }
-        h1 { color: #d32f2f; font-size: 2.2rem; min-height: 80px; transition: 0.3s; }
+        .container { width: 90%; max-width: 500px; }
+        h1 { color: #d32f2f; font-size: 2rem; min-height: 80px; transition: opacity 0.5s; }
         .botones {
-            display: none; 
+            display: none; /* Se activa por JS */
             justify-content: center;
             align-items: center;
-            gap: 20px;
+            gap: 15px;
             margin-top: 20px;
         }
         button {
-            padding: 15px 30px;
-            font-size: 1.2rem;
+            padding: 15px 25px;
+            font-size: 1.1rem;
             border: none;
             border-radius: 50px;
             cursor: pointer;
             font-weight: bold;
-            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease;
         }
         #yes { background-color: #ff4081; color: white; }
-        #no { background-color: #9e9e9e; color: white; position: relative; }
+        #no { background-color: #9e9e9e; color: white; }
         .foto-final {
-            width: 100%; max-width: 350px;
-            border: 10px solid white;
+            width: 100%; max-width: 300px;
+            border: 8px solid white;
             border-radius: 10px;
             transform: rotate(-3deg);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            margin: 20px 0;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            margin-top: 15px;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1 id="texto">...</h1>
+        <h1 id="texto">Cargando...</h1>
         <div class="botones" id="contenedor-botones">
             <button id="yes">Sí</button>
             <button id="no">No</button>
         </div>
     </div>
+
+    <audio id="musica" loop prefetch="auto">
+        <source src="musica.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // Esperar a que el DOM esté listo
+        document.addEventListener("DOMContentLoaded", () => {
+            const texto = document.getElementById("texto");
+            const botones = document.getElementById("contenedor-botones");
+            const yesBtn = document.getElementById("yes");
+            const noBtn = document.getElementById("no");
+            const musica = document.getElementById("musica");
+
+            const mensajes = [
+                "HOLA AMOR ❤️",
+                "Tengo algo que decirte...",
+                "Eres lo mejor que me ha pasado.",
+                "¿Quieres ser mi San Valentín? 🌹"
+            ];
+
+            const frasesNo = ["¿Segura?", "Piénsalo bien...", "¡Andaaa!", "😭", "💔"];
+
+            let i = 0;
+            let countNo = 0;
+            let scaleSi = 1;
+
+            // Función para mostrar mensajes
+            function mostrarSiguiente() {
+                if (i < mensajes.length) {
+                    texto.style.opacity = 0;
+                    setTimeout(() => {
+                        texto.innerText = mensajes[i];
+                        texto.style.opacity = 1;
+                        i++;
+                        if (i === mensajes.length) {
+                            setTimeout(() => { botones.style.display = "flex"; }, 1000);
+                        } else {
+                            setTimeout(mostrarSiguiente, 2000);
+                        }
+                    },
