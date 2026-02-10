@@ -3,59 +3,89 @@ const noButton = document.getElementById("no");
 const textoPrincipal = document.getElementById("texto");
 const music = document.getElementById("musica");
 
+// Ocultamos los botones al principio para que lean los mensajes
+document.querySelector('.botones').style.display = 'none';
+
 let scale = 1;
 let clickCount = 0;
 
-// 1. Esto cambia el texto inicial a la pregunta automáticamente
-setTimeout(() => {
-    if(textoPrincipal) {
-        textoPrincipal.innerText = "¿Quieres ser mi San Valentín? ❤️";
-    }
-}, 3000); // 3 segundos de espera
-
-const mensajesNo = [
-    "¿Segura? 🧐",
-    "Piénsalo bien... 🥺",
-    "¡Andaaa! 🌹",
-    "¡No me hagas esto! 😭",
-    "Última oportunidad... 💖"
+// 1. SECUENCIA DE MENSAJES INICIALES
+const mensajesIniciales = [
+    "HOLA AMOR...",
+    "Tengo algo que decirte...",
+    "Desde que te conocí...",
+    "Mi vida es mucho más bonita.",
+    "Por eso...",
+    "¿Quieres ser mi San Valentín? ❤️"
 ];
 
-// Lógica para el botón NO
+let msgIndex = 0;
+
+function mostrarSecuencia() {
+    if (msgIndex < mensajesIniciales.length) {
+        textoPrincipal.innerText = mensajesIniciales[msgIndex];
+        textoPrincipal.style.animation = "none"; // Reiniciar animación
+        textoPrincipal.offsetHeight; // Truco para que la animación vuelva a empezar
+        textoPrincipal.style.animation = "fadeIn 1s";
+        
+        msgIndex++;
+        
+        // Si es el último mensaje (la pregunta), mostramos los botones
+        if (msgIndex === mensajesIniciales.length) {
+            setTimeout(() => {
+                document.querySelector('.botones').style.display = 'flex';
+            }, 1000);
+        } else {
+            setTimeout(mostrarSecuencia, 2500); // Cambia el mensaje cada 2.5 segundos
+        }
+    }
+}
+
+// Iniciar la secuencia al cargar
+mostrarSecuencia();
+
+// 2. LÓGICA DEL BOTÓN NO
+const mensajesNo = [
+    "¿Estás segura? 🧐",
+    "Piénsalo bien... 🥺",
+    "¡Andaaaaa! 🌹",
+    "Me vas a hacer llorar... 😭",
+    "¡Di que sí! ✨"
+];
+
 noButton.addEventListener("click", () => {
     scale += 0.5;
     yesButton.style.transform = `scale(${scale})`;
+    
+    let currentNoScale = 1 - (clickCount * 0.15);
+    if (currentNoScale > 0.3) {
+        noButton.style.transform = `scale(${currentNoScale})`;
+    } else {
+        noButton.style.display = "none";
+    }
 
     if (clickCount < mensajesNo.length) {
         noButton.innerText = mensajesNo[clickCount];
     }
-
-    // Mover el botón NO de lugar para que sea difícil darle clic (opcional)
-    const x = Math.random() * (window.innerWidth - noButton.offsetWidth);
-    const y = Math.random() * (window.innerHeight - noButton.offsetHeight);
-    noButton.style.position = "absolute";
-    noButton.style.left = x + "px";
-    noButton.style.top = y + "px";
-
     clickCount++;
 });
 
-// Lógica para el botón SÍ
+// 3. LÓGICA DEL BOTÓN SÍ
 yesButton.addEventListener("click", () => {
-    music.play().catch(e => console.log("Error con música:", e));
+    music.volume = 0.5;
+    music.play();
 
     document.body.innerHTML = `
-        <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; text-align: center; background: #ff80ab; color: white; font-family: sans-serif;">
-            <h1>¡SABÍA QUE DIRÍAS QUE SÍ! 😍❤️</h1>
-            <img src="nosotros.jpg" alt="Nosotros" style="width: 80%; max-width: 400px; border-radius: 15px; border: 8px solid white; box-shadow: 0 10px 30px rgba(0,0,0,0.3); margin: 20px 0;">
-            <p style="font-size: 1.2rem;">"De todas las personas, siempre te elegiría a ti."</p>
+        <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; background: linear-gradient(135deg, #ff80ab 0%, #ff4081 100%); color: white; text-align: center; font-family: sans-serif; padding: 20px;">
+            <h1 style="font-size: 3rem; margin-bottom: 20px;">¡SABÍA QUE DIRÍAS QUE SÍ! 😍❤️</h1>
+            <img src="nosotros.jpg" alt="Nuestra Foto" style="width: 100%; max-width: 400px; border-radius: 15px; border: 8px solid white; box-shadow: 0 10px 30px rgba(0,0,0,0.3); transform: rotate(-3deg);">
+            <p style="font-size: 1.5rem; margin-top: 30px; font-style: italic;">"Nuestra historia es mi favorita."</p>
+            <div style="font-size: 3rem; margin-top: 15px;">🌹✨🥂</div>
         </div>
     `;
 });
 
-// Activar música con un clic en cualquier lado
+// Activar audio con el primer clic
 document.addEventListener("click", () => {
-    music.play().then(() => {
-        music.volume = 0.5;
-    }).catch(() => {});
+    if (music.paused) music.play().then(() => music.pause());
 }, { once: true });
