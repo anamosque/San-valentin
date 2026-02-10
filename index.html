@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>San Valentín 💘</title>
     <style>
-        /* --- ESTILOS --- */
         body {
             display: flex;
             justify-content: center;
@@ -13,75 +12,148 @@
             height: 100vh;
             margin: 0;
             background-color: #ffebee;
-            font-family: 'Arial', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             overflow: hidden;
             text-align: center;
-            transition: background 1s ease;
         }
 
-        .container {
-            max-width: 600px;
+        #contenido-invitacion {
             padding: 20px;
+            max-width: 500px;
         }
 
         h1 {
             color: #d32f2f;
-            font-size: 2.5rem;
-            min-height: 100px;
-            margin-bottom: 20px;
-            line-height: 1.2;
+            font-size: 2.2rem;
+            min-height: 80px;
+            transition: opacity 0.5s ease;
         }
 
         .botones {
-            display: none; /* Se ocultan al inicio para la secuencia */
+            display: none; /* Se activa por JS al final de los mensajes */
             justify-content: center;
             align-items: center;
             gap: 20px;
-            margin-top: 20px;
+            margin-top: 30px;
         }
 
         button {
             padding: 15px 30px;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             border: none;
             border-radius: 50px;
             cursor: pointer;
-            transition: transform 0.2s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
         }
 
-        #yes {
-            background-color: #ff4081;
-            color: white;
-        }
+        #yes { background-color: #ff4081; color: white; }
+        #no { background-color: #9e9e9e; color: white; }
 
-        #no {
-            background-color: #9e9e9e;
-            color: white;
-        }
-
-        /* Animación de aparición */
-        .fade-in {
-            animation: fadeInAnim 1s forwards;
-        }
-
-        @keyframes fadeInAnim {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        .fade { opacity: 0; }
+        .visible { opacity: 1; }
     </style>
 </head>
 <body>
 
-    <div class="container" id="main-content">
-        <h1 id="texto" class="fade-in">...</h1>
+    <div id="contenido-invitacion">
+        <h1 id="texto-pantalla" class="fade">...</h1>
 
-        <div class="botones" id="contenedor-botones">
+        <div id="grupo-botones" class="botones">
             <button id="yes">Sí</button>
             <button id="no">No</button>
         </div>
     </div>
 
     <audio id="musica" loop>
-        <source src="musica.mp3" type="audio/
+        <source src="musica.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        const texto = document.getElementById("texto-pantalla");
+        const btnGrupo = document.getElementById("grupo-botones");
+        const yesBtn = document.getElementById("yes");
+        const noBtn = document.getElementById("no");
+        const music = document.getElementById("musica");
+
+        // --- 1. CONFIGURACIÓN DE MENSAJES INICIALES ---
+        const mensajes = [
+            "Hola, mi amor... ❤️",
+            "Tengo algo especial que decirte...",
+            "Me haces la persona más feliz del mundo.",
+            "Y por eso mismo...",
+            "¿Quieres ser mi San Valentín? 🌹"
+        ];
+
+        let index = 0;
+
+        function secuenciaMensajes() {
+            if (index < mensajes.length) {
+                // Efecto de desvanecimiento
+                texto.classList.remove("visible");
+                texto.classList.add("fade");
+
+                setTimeout(() => {
+                    texto.innerText = mensajes[index];
+                    texto.classList.remove("fade");
+                    texto.classList.add("visible");
+                    index++;
+                    
+                    if (index === mensajes.length) {
+                        // Al llegar al último, mostrar los botones
+                        setTimeout(() => {
+                            btnGrupo.style.display = "flex";
+                        }, 1000);
+                    } else {
+                        setTimeout(secuenciaMensajes, 2500); // Tiempo entre frases
+                    }
+                }, 500);
+            }
+        }
+
+        // Iniciar al cargar la página
+        window.onload = secuenciaMensajes;
+
+        // --- 2. LÓGICA DEL BOTÓN NO ---
+        let scaleSi = 1;
+        let scaleNo = 1;
+        const bromasNo = ["¿Segura?", "Piénsalo...", "¡Oye!", "¡Di que sí!", "💔"];
+        let clickNo = 0;
+
+        noBtn.addEventListener("click", () => {
+            scaleSi += 0.5;
+            yesBtn.style.transform = `scale(${scaleSi})`;
+            
+            scaleNo -= 0.15;
+            noBtn.style.transform = `scale(${scaleNo})`;
+            
+            if(clickNo < bromasNo.length) {
+                noBtn.innerText = bromasNo[clickNo];
+                clickNo++;
+            }
+            if(scaleNo < 0.3) noBtn.style.display = "none";
+        });
+
+        // --- 3. LÓGICA DEL BOTÓN SÍ ---
+        yesBtn.addEventListener("click", () => {
+            music.volume = 0.5;
+            music.play();
+
+            document.body.innerHTML = `
+                <div style="background: #ff80ab; width: 100vw; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; text-align: center; font-family: sans-serif; padding: 20px;">
+                    <h1 style="color: white; font-size: 3rem;">¡SABÍA QUE DIRÍAS QUE SÍ! 😍❤️</h1>
+                    <img src="nosotros.jpg" style="max-width: 80%; border: 10px solid white; border-radius: 10px; transform: rotate(-3deg); box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+                    <p style="font-size: 1.5rem; margin-top: 20px;">"De todas las personas, siempre te elegiría a ti."</p>
+                    <div style="font-size: 2.5rem; margin-top: 10px;">✨ 🌹 🥂</div>
+                </div>
+            `;
+        });
+
+        // Pre-cargar audio (necesario para navegadores modernos)
+        document.addEventListener("click", () => {
+            if (music.paused) music.play().then(() => music.pause());
+        }, { once: true });
+    </script>
+</body>
+</html>
