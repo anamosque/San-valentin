@@ -5,37 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>San Valentín 💘</title>
     <style>
-        /* ESTILOS DIRECTOS AQUÍ */
+        /* --- ESTILOS --- */
         body {
-            margin: 0;
-            padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            margin: 0;
             background-color: #ffebee;
             font-family: 'Arial', sans-serif;
             overflow: hidden;
             text-align: center;
+            transition: background 1s ease;
         }
 
         .container {
-            position: relative;
-            z-index: 10;
+            max-width: 600px;
+            padding: 20px;
         }
 
         h1 {
             color: #d32f2f;
             font-size: 2.5rem;
-            margin-bottom: 30px;
-            padding: 0 20px;
+            min-height: 100px;
+            margin-bottom: 20px;
+            line-height: 1.2;
         }
 
         .botones {
-            display: flex;
+            display: none; /* Se ocultan al inicio para la secuencia */
             justify-content: center;
             align-items: center;
             gap: 20px;
+            margin-top: 20px;
         }
 
         button {
@@ -44,8 +46,9 @@
             border: none;
             border-radius: 50px;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: transform 0.2s ease;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            font-weight: bold;
         }
 
         #yes {
@@ -58,90 +61,27 @@
             color: white;
         }
 
-        .hidden { display: none; }
+        /* Animación de aparición */
+        .fade-in {
+            animation: fadeInAnim 1s forwards;
+        }
+
+        @keyframes fadeInAnim {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body>
 
-    <div class="container" id="main-container">
-        <h1 id="texto-pregunta">Hola... tengo algo que decirte...</h1>
-        <div class="botones">
+    <div class="container" id="main-content">
+        <h1 id="texto" class="fade-in">...</h1>
+
+        <div class="botones" id="contenedor-botones">
             <button id="yes">Sí</button>
             <button id="no">No</button>
         </div>
     </div>
 
     <audio id="musica" loop>
-        <source src="musica.mp3" type="audio/mpeg">
-    </audio>
-
-    <script>
-        // LÓGICA DIRECTA AQUÍ
-        const yesBtn = document.getElementById('yes');
-        const noBtn = document.getElementById('no');
-        const texto = document.getElementById('texto-pregunta');
-        const musica = document.getElementById('musica');
-        
-        let scaleSi = 1;
-        let scaleNo = 1;
-        let count = 0;
-
-        const frasesNo = [
-            "¿Seguro? 🧐",
-            "Piénsalo bien... 🥺",
-            "¡Por favor! 🌹",
-            "No me rompas el corazón 💔",
-            "¡Dí que sí! ✨"
-        ];
-
-        // 1. Cambiar mensaje inicial a la pregunta automáticamente tras 2 segundos
-        setTimeout(() => {
-            texto.innerText = "¿Quieres ser mi San Valentín? ❤️";
-        }, 2000);
-
-        // 2. Acción al presionar NO
-        noBtn.addEventListener('click', () => {
-            // El SI crece
-            scaleSi += 0.6;
-            yesBtn.style.transform = `scale(${scaleSi})`;
-            
-            // El NO se achica
-            scaleNo -= 0.15;
-            if (scaleNo < 0.3) {
-                noBtn.style.display = 'none'; // Desaparece si es muy pequeño
-            } else {
-                noBtn.style.transform = `scale(${scaleNo})`;
-            }
-
-            // Cambiar texto del botón No
-            if (count < frasesNo.length) {
-                noBtn.innerText = frasesNo[count];
-            }
-            count++;
-        });
-
-        // 3. Acción al presionar SÍ
-        yesBtn.addEventListener('click', () => {
-            // Reproducir música
-            musica.play().catch(e => console.log("Error música:", e));
-
-            // Cambiar pantalla final
-            document.body.innerHTML = `
-                <div style="background-color: #ff80ab; width: 100vw; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; animation: fadeIn 1s;">
-                    <h1 style="color: white; font-size: 3rem;">¡SABÍA QUE DIRÍAS QUE SÍ! 😍❤️</h1>
-                    <img src="nosotros.jpg" style="max-width: 350px; border: 10px solid white; border-radius: 10px; transform: rotate(-3deg); box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
-                    <p style="font-size: 1.5rem; margin-top: 20px; font-style: italic;">"Nuestra historia es mi favorita."</p>
-                    <div style="font-size: 2rem; margin-top: 10px;">🌹✨🥂</div>
-                </div>
-            `;
-        });
-
-        // Intentar activar música con el primer toque en pantalla
-        document.addEventListener('click', () => {
-            musica.play().then(() => {
-                musica.volume = 0.5;
-            }).catch(() => {});
-        }, { once: true });
-    </script>
-</body>
-</html>
+        <source src="musica.mp3" type="audio/
