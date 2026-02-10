@@ -51,6 +51,8 @@ const mensajesNo = [
     "¡Porfi! 🌹",
     "Me vas a hacer llorar... 😭",
     "¡Di que sí! ✨"
+    "¡Ya ni se ve!"
+    "Obligado tonces"
 ];
 
 noButton.addEventListener("click", () => {
