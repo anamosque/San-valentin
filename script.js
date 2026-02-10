@@ -16,6 +16,7 @@ const mensajesIniciales = [
     "Desde que te conocí...",
     "Mi vida es mucho más bonita.",
     "Por eso...",
+    "Necesito saber si..."
     "¿Quieres ser mi San Valentín? ❤️"
 ];
 
@@ -46,9 +47,9 @@ mostrarSecuencia();
 
 // 2. LÓGICA DEL BOTÓN NO
 const mensajesNo = [
-    "¿Estás segura? 🧐",
+    "¿Estás seguro? 🧐",
     "Piénsalo bien... 🥺",
-    "¡Andaaaaa! 🌹",
+    "¡Porfi! 🌹",
     "Me vas a hacer llorar... 😭",
     "¡Di que sí! ✨"
 ];
