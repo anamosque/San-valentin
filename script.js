@@ -32,6 +32,13 @@ const music = document.getElementById("music");
 
 /* BOTÓN SÍ */
 yesButton.addEventListener("click", () => {
+  overlay.innerHTML = `
+  <img src="img/nosotros.jpg">
+  <div class="final-message">
+    Sabía que aceptarías 💘
+  </div>
+`}
+                           
   // reproducir música ANTES de borrar el body
   music.volume = 0.8;
   music.play();
